@@ -13,4 +13,13 @@
     <input type="submit" value="Delete">
 </form>
 
+<h2>Posts</h2>
+<ul>
+    {% for post in user.posts %}
+    <a href="/posts/{{ post.id }}">{{ post.title }}</a>
+    {% else %}
+    <p>This user has no posts.</p>
+    {% endfor %}
+</ul>
+
 {% end block %}

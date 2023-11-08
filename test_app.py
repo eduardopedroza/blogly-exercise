@@ -1,6 +1,7 @@
 from unittest import TestCase
 from app import app, db
-from models import User
+from models import User, Post
+
 
 class UserViewsTests(TestCase):
 
@@ -23,3 +24,19 @@ class UserViewsTests(TestCase):
         # Check that the user is not in the database
         user = User.query.get(self.user_id)
         self.assertIsNone(user)
+
+    def test_show_post_details(self):
+        """Test showing the details of a post."""
+        with self.client as c:
+            response = c.get(f'/posts/{self.post_id}')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('Test Post', response.data)
+
+    def test_delete_post(self):
+        """Test deleting a post."""
+        with self.client as c:
+            response = c.post(f'/posts/{self.post_id}/delete', follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            # Verify the post has been deleted
+            post = Post.query.get(self.post_id)
+            self.assertIsNone(post)

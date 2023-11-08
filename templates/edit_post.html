@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Create a User{% endblock %}
+
+{% block content %}
+<h1>Create a User</h1>
+
+<form action="/users/{{user.id}}/posts/new" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" value="{{ post.title }}" required>
+    <br>
+    <label for="content">Content:</label>
+    <input type="text" id="content" name="content" value="{{ post.content }}" required>
+    <br>  
+    <a href="/users/{{user.id}}">Cancel</a>
+    <input type="submit" value="Add">
+</form>
+
+{% endblock %}
