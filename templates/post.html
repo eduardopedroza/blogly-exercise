@@ -4,12 +4,16 @@
 
 {% block content %}
 
-<h1>{{ post.title }}</h1>
-<p>{{ post.content }}</p>
-<a href="/users/{{ user.id }}">Cancel</a>
-<a href="/posts/{{ post.id }}/edit">Edit</a>
-<form action="/posts/{{ post.id }}/delete" method="POST">
-    <input type="submit" value="Delete">
-</form>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    {% for tag in post.tags %}
+        <p>{{tag.name}}</p>
+    (% endfor %)
 
-{% end block %}
+    <a href="/users/{{ user.id }}">Cancel</a>
+    <a href="/posts/{{ post.id }}/edit">Edit</a>
+    <form action="/posts/{{ post.id }}/delete" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+
+{% endblock %}
